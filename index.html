@@ -1,0 +1,173 @@
+<title>Mr. God からの挑戦状 Level 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=BIZ+UDPGothic:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#F6F8FB; --surface:#FFFFFF; --ink:#1B2433; --muted:#667085; --line:#DDE3EC;
+  --accent:#2B59C3; --accent-ink:#FFFFFF; --tint:#EAF0FA; --now:#FFF4D6; --now-line:#E0B53A;
+  --en:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --ja:"BIZ UDPGothic","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#10151E; --surface:#171E2A; --ink:#E6EBF3; --muted:#98A2B3; --line:#2A3445;
+    --accent:#7FA3F0; --accent-ink:#0E1522; --tint:#1C2740; --now:#33301F; --now-line:#C9A23A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#10151E; --surface:#171E2A; --ink:#E6EBF3; --muted:#98A2B3; --line:#2A3445;
+  --accent:#7FA3F0; --accent-ink:#0E1522; --tint:#1C2740; --now:#33301F; --now-line:#C9A23A;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--ja);font-size:15px;line-height:1.6}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:0 120px}
+header.top{padding-block:28px 12px}
+header.top h1{font-size:24px;margin:0;letter-spacing:.02em;text-wrap:balance}
+header.top p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select,button,.tog{font:inherit;font-size:13px;color:var(--ink)}
+select{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 8px;max-width:100%}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.btn:focus-visible,select:focus-visible,.play:focus-visible,.tog input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:var(--surface);padding:6px 9px;cursor:pointer;font-variant-numeric:tabular-nums}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.tog{display:inline-flex;align-items:center;gap:5px;cursor:pointer;user-select:none}
+.tog input{accent-color:var(--accent)}
+.spacer{flex:1}
+.status{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;width:100%}
+h2.ch{font-size:19px;margin:36px 0 4px;padding-bottom:6px;border-bottom:2px solid var(--ink);display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+h2.ch .no{font-size:13px;color:var(--muted);font-weight:400;letter-spacing:.04em}
+h2.ch .cplay{margin-left:auto}
+.grp{margin-top:18px}
+.gh{display:flex;align-items:center;gap:10px;background:var(--tint);border-left:4px solid var(--accent);padding:5px 10px;font-weight:700;font-size:14px}
+.gh span{flex:1}
+.gh .btn{padding:3px 10px;font-size:12px;font-weight:400}
+ol.ss{list-style:none;margin:0;padding:0}
+.s{display:grid;grid-template-columns:36px 3.2em 1fr;gap:4px 8px;align-items:start;padding:10px 6px;border-bottom:1px solid var(--line);border-radius:4px}
+.s.now{background:var(--now);box-shadow:inset 3px 0 0 var(--now-line)}
+.play{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--accent);display:grid;place-items:center;cursor:pointer;padding:0}
+.play svg{width:14px;height:14px;fill:currentColor}
+.s.now .play{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.s.cont{border-top:0}
+.num{font-family:var(--en);font-weight:700;font-size:13px;font-variant-numeric:tabular-nums;color:var(--muted);padding-top:5px}
+.en{white-space:pre-line;font-family:var(--en);font-size:17px;line-height:1.5;padding-top:3px;overflow-wrap:anywhere}
+.ja{display:none;white-space:pre-line;grid-column:3;font-size:13px;color:var(--muted)}
+body.hide-en .en{color:transparent;background:var(--line);border-radius:3px;cursor:pointer}
+body.hide-ja .ja{color:transparent;background:var(--line);border-radius:3px;cursor:pointer}
+body.hide-en .s.reveal-en .en,body.hide-ja .s.reveal-ja .ja{color:inherit;background:none}
+body.hide-ja .s.reveal-ja .ja{color:var(--muted)}
+.note{color:var(--muted);font-size:12px;margin-top:32px}
+@media (max-width:520px){ .en{font-size:16px} .s{grid-template-columns:34px 2.8em 1fr} .spacer{display:none} }
+@media (prefers-reduced-motion:no-preference){ .s{transition:background-color .2s} }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Mr. God からの挑戦状 Level 2</h1>
+    <p>音読シート Level 2　全20題　▶で1題ずつ再生／「連続再生」で20題を続けて聞けます</p>
+  </header>
+
+  <div class="bar" role="toolbar" aria-label="再生の操作">
+    <select id="jump" aria-label="Levelへ移動" hidden></select>
+    <button class="btn primary" id="playAll" type="button">連続再生</button>
+    <button class="btn" id="stop" type="button">停止</button>
+    <span class="seg" role="group" aria-label="再生速度" id="rate">
+      <button type="button" data-r="0.75">0.75×</button><button type="button" data-r="0.9">0.9×</button><button type="button" data-r="1" aria-pressed="true">1×</button><button type="button" data-r="1.2">1.2×</button>
+    </span>
+    <span class="seg" role="group" aria-label="繰り返し回数" id="rep">
+      <button type="button" data-n="1" aria-pressed="true">1回</button><button type="button" data-n="2">2回</button><button type="button" data-n="3">3回</button>
+    </span>
+    <span class="spacer"></span>
+    <label class="tog"><input type="checkbox" id="hideEn"><span>英文を隠す</span></label>
+    <input type="checkbox" id="hideJa" hidden>
+    <div class="status" id="status" aria-live="polite">待機中</div>
+  </div>
+
+  <main id="list"></main>
+  <p class="note">音声は合成音声です（19番は父と母の2人の声で読み分け）。「英文を隠す」にしているときは、英文をタップすると表示されます。</p>
+</div>
+
+<script>
+const DATA = [{"no":2,"t":"Level 2","secs":[{"t":"No. 1–10","ex":[{"id":"1.","items":[["Experts warn that the overconsumption of caffeine at a young age could be harmful to both physical and mental health.","",[["Experts warn that the overconsumption of caffeine at a young age could be harmful to both physical and mental health.","A"]],21]]},{"id":"2.","items":[["The World Health Organization (WHO) regards gaming disorder as a disease like alcohol and gambling addictions. Specified symptoms of gaming disorder include problems with control over the time and frequency of gaming, and the continuation of a game-centered lifestyle that severely impacts daily life activities.","",[["The World Health Organization regards gaming disorder as a disease like alcohol and gambling addictions. Specified symptoms of gaming disorder include problems with control over the time and frequency of gaming, and the continuation of a game-centered lifestyle that severely impacts daily life activities.","A"]],22]]},{"id":"3.","items":[["Despite its negative image among some tourists, many who do make the trip to Japan are pleasantly surprised by the friendliness of its people and the efficiency of its public transportation.","",[["Despite its negative image among some tourists, many who do make the trip to Japan are pleasantly surprised by the friendliness of its people and the efficiency of its public transportation.","A"]],23]]},{"id":"4.","items":[["The doctor’s quick arrival and very careful examination of the patient resulted in her speedy recovery.","",[["The doctor’s quick arrival and very careful examination of the patient resulted in her speedy recovery.","A"]],24]]},{"id":"5.","items":[["The passage of the first American copyright law, in 1790, had made literature property and had therefore made authorship as a profession a possibility for American writers.","",[["The passage of the first American copyright law, in 1790, had made literature property and had therefore made authorship as a profession a possibility for American writers.","A"]],25]]},{"id":"6.","items":[["Such loss of our digital culture could make it difficult for those in the future to understand how we lived. This is because it is the small bits and pieces of a culture that we barely think about that often deliver the greatest clues and insights to archeologists and anthropologists studying past cultures. The materials and process used to make an ancient clay pot, for example, tell us about the food culture of the society that made it.","",[["Such loss of our digital culture could make it difficult for those in the future to understand how we lived. This is because it is the small bits and pieces of a culture that we barely think about that often deliver the greatest clues and insights to archeologists and anthropologists studying past cultures. The materials and process used to make an ancient clay pot, for example, tell us about the food culture of the society that made it.","A"]],26]]},{"id":"7.","items":[["It is not building with blocks but the world of video games that ultimately provide Ricky with the means by which to express and to discover himself.","",[["It is not building with blocks but the world of video games that ultimately provide Ricky with the means by which to express and to discover himself.","A"]],27]]},{"id":"8.","items":[["People differ in the color of skin, eyes, hair, in stature, bodily proportions, and in many other traits. Some of us have blue and others brown eyes, some have prominent and others have flat noses, some are tall and others short.","",[["People differ in the color of skin, eyes, hair, in stature, bodily proportions, and in many other traits. Some of us have blue and others brown eyes, some have prominent and others have flat noses, some are tall and others short.","A"]],28]]},{"id":"9.","items":[["In the 21st century, we are discovering more and more about the brain and the role of emotions, and challenging old ideas about how we learn, make decisions, act and remember.","",[["In the 21st century, we are discovering more and more about the brain and the role of emotions, and challenging old ideas about how we learn, make decisions, act and remember.","A"]],29]]},{"id":"10.","items":[["What we do know about discipline is that corporal punishment remains extremely popular in this country. In a 1995 poll, 94 percent of parents of preschoolers admitted to having struck their children within the last year, a fact that’s not easy to square with claims that parents have become softer or more humane.","",[["What we do know about discipline is that corporal punishment remains extremely popular in this country. In a 1995 poll, 94 percent of parents of preschoolers admitted to having struck their children within the last year, a fact that’s not easy to square with claims that parents have become softer or more humane.","A"]],30]]}]},{"t":"No. 11–20","ex":[{"id":"11.","items":[["In videos of the experiment, you can see the children squirming, kicking, hiding their eyes — desperately trying to exercise self-control so they can wait and get two marshmallows.","",[["In videos of the experiment, you can see the children squirming, kicking, hiding their eyes, desperately trying to exercise self-control so they can wait and get two marshmallows.","A"]],31]]},{"id":"12.","items":[["I want to talk about memory ― memory and the loss of memory ― about remembering and forgetting. My own memory was never a good one, but such as it is, or was, I am beginning to lose it, and I find this both a worrying and an interesting process. What do I forget? I won’t say everything.","",[["I want to talk about memory, memory and the loss of memory, about remembering and forgetting. My own memory was never a good one, but such as it is, or was, I am beginning to lose it, and I find this both a worrying and an interesting process. What do I forget? I won’t say everything.","A"]],32]]},{"id":"13.","items":[["The actions of men are said to be governed by the faculty of reason, those of women by the faculty of instinct, but this kind of stereotype distorts our way of thinking.","",[["The actions of men are said to be governed by the faculty of reason, those of women by the faculty of instinct, but this kind of stereotype distorts our way of thinking.","A"]],33]]},{"id":"14.","items":[["While people living in this area have numerous expressions for “I’m sorry”, they have no equivalent of the English “It’s your fault”. That is a foreign, if not unimaginable, concept to them.","",[["While people living in this area have numerous expressions for “I’m sorry”, they have no equivalent of the English “It’s your fault”. That is a foreign, if not unimaginable, concept to them.","A"]],34]]},{"id":"15.","items":[["There are currently an estimated 60,000 centenarians in the U.S. with up to 70 beyond the age of 110. For the past decade, researchers have marveled at these folks who often live free of major disabilities ― well into their 90s, if not longer.","",[["There are currently an estimated 60,000 centenarians in the US with up to 70 beyond the age of 110. For the past decade, researchers have marveled at these folks who often live free of major disabilities, well into their 90s, if not longer.","A"]],35]]},{"id":"16.","items":[["Only by understanding if, when and how light pollution affects nocturnal life can we find ways to mitigate the impact.","",[["Only by understanding if, when and how light pollution affects nocturnal life can we find ways to mitigate the impact.","A"]],36]]},{"id":"17.","items":[["Yet tourism has also brought problems, some specific to the island and others to an industry that many communities in Taiwan and elsewhere have turned to when the forces of modernization erode traditional ways of life.\nMost obvious are problems that result from having tens of thousands of people descend on a location where public works were designed to serve the needs of a village.","",[["Yet tourism has also brought problems, some specific to the island and others to an industry that many communities in Taiwan and elsewhere have turned to when the forces of modernization erode traditional ways of life.","A"],["Most obvious are problems that result from having tens of thousands of people descend on a location where public works were designed to serve the needs of a village.","A"]],37]]},{"id":"18.","items":[["Such is the pace of what is blandly labeled “global change” that there are only a handful of comparable examples in earth’s history, the most recent being the asteroid impact that ended the reign of the dinosaurs, sixty-six million years ago. Humans are producing no-analog climates, no-analog ecosystems, a whole no-analog future.","",[["Such is the pace of what is blandly labeled “global change” that there are only a handful of comparable examples in earth’s history, the most recent being the asteroid impact that ended the reign of the dinosaurs, sixty-six million years ago. Humans are producing no-analog climates, no-analog ecosystems, a whole no-analog future.","A"]],38]]},{"id":"19.","items":[["‘My God,’ said my father to my mother. ‘Again no money? But I gave you twelve dollars at the beginning of the week. What have you done with it?’\n‘I don’t know. It went away.’\n‘So quickly…by Tuesday? Impossible.’\n‘It couldn’t be helped. Some of it I used to pay old bills. We’ve owed money to Jacob for I don’t know how long.’","",[["‘My God,’ said my father to my mother. ‘Again no money? But I gave you twelve dollars at the beginning of the week. What have you done with it?’","B"],["‘I don’t know. It went away.’","A"],["‘So quickly... by Tuesday? Impossible.’","B"],["‘It couldn’t be helped. Some of it I used to pay old bills. We’ve owed money to Jacob for I don’t know how long.’","A"]],39]]},{"id":"20.","items":[["Agriculture was a step in human progress to which subsequently there was nothing comparable until our machine age. Agriculture made possible an immense rise in the number of human species in the regions where it could be successfully practised.","",[["Agriculture was a step in human progress to which subsequently there was nothing comparable until our machine age. Agriculture made possible an immense rise in the number of human species in the regions where it could be successfully practised.","A"]],40]]}]}]}];
+const PLAY='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const list=document.getElementById('list'), jump=document.getElementById('jump'), statusEl=document.getElementById('status');
+const pad=n=>String(n).padStart(3,'0');
+const order=[]; const rows={};
+const tidy=s=>s.replace(/\s+([.,?!])/g,'$1').replace(/^\./,'');
+DATA.forEach(ch=>{
+  const opt=document.createElement('option'); opt.value='ch'+ch.no; opt.textContent=`${ch.t}`; jump.append(opt);
+  const h=document.createElement('h2'); h.className='ch'; h.id='ch'+ch.no;
+  h.innerHTML=`<span class="no">音読シート</span><span></span><button class="btn cplay" type="button" hidden></button>`;
+  h.children[1].textContent=ch.t; list.append(h);
+  const chNums=[];
+  h.querySelector('.cplay').onclick=()=>startQueue(chNums,ch.t);
+  ch.secs.forEach(g=>{
+    const nums=[]; g.ex.forEach(e=>e.items.forEach(it=>nums.push(it[3])));
+    if(!nums.length) return;
+    const sec=document.createElement('section'); sec.className='grp';
+    const gh=document.createElement('div'); gh.className='gh';
+    gh.innerHTML='<span></span><button class="btn" type="button">まとめて再生</button>'; gh.firstChild.textContent=g.t;
+    gh.querySelector('button').onclick=()=>startQueue(nums,g.t);
+    const ol=document.createElement('ol'); ol.className='ss';
+    g.ex.forEach(e=>e.items.forEach((it,ii)=>{
+      const [en,ja,,n]=it;
+      order.push(n); chNums.push(n);
+      const li=document.createElement('li'); li.className='s'+(ii?' cont':''); li.id='s'+pad(n);
+      const lab=ii?'':(e.id==='cf.'?'cf.':e.id);
+      li.innerHTML=`<button class="play" type="button" aria-label="${e.id} ${ii+1}を再生">${PLAY}</button><span class="num"></span><span class="en"></span><span class="ja"></span>`;
+      li.querySelector('.num').textContent=lab;
+      li.querySelector('.en').textContent=tidy(en); li.querySelector('.ja').textContent=ja;
+      li.querySelector('.play').onclick=()=>startQueue([n],`${ch.t} No.${e.id.replace(".","")}`);
+      li.querySelector('.en').onclick=()=>li.classList.toggle('reveal-en');
+      li.querySelector('.ja').onclick=()=>li.classList.toggle('reveal-ja');
+      rows[n]=li; ol.append(li);
+    }));
+    sec.append(gh,ol); list.append(sec);
+  });
+});
+jump.onchange=()=>document.getElementById(jump.value).scrollIntoView({behavior:'smooth'});
+
+const SEG = {"21":[2,0.6,6.981],"22":[2,7.581,25.291],"23":[2,25.891,35.887],"24":[2,36.487,42.344],"25":[2,42.944,53.258],"26":[2,53.858,77.075],"27":[2,77.675,85.555],"28":[2,86.155,99.019],"29":[2,99.619,109.082],"30":[2,109.682,126.854],"31":[2,127.454,136.957],"32":[2,137.557,153.195],"33":[2,153.795,162.821],"34":[2,163.421,173.226],"35":[2,173.826,188.424],"36":[2,189.024,195.691],"37":[2,196.291,217.879],"38":[2,218.479,237.359],"39":[2,237.959,259.865],"40":[2,260.465,273.588]};
+const audio=new Audio(); audio.preload='auto';
+let rate=1, reps=1, queue=[], qi=0, rep=0, label='', cur=null, gapTimer=null, endAt=0, raf=0, loadedCh=0, token=0;
+const setPressed=(grp,btn)=>grp.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b===btn));
+document.getElementById('rate').onclick=e=>{const b=e.target.closest('button'); if(!b)return; rate=+b.dataset.r; audio.playbackRate=rate; setPressed(e.currentTarget,b)};
+document.getElementById('rep').onclick=e=>{const b=e.target.closest('button'); if(!b)return; reps=+b.dataset.n; setPressed(e.currentTarget,b)};
+function mark(n){ if(cur) rows[cur].classList.remove('now'); cur=n; if(n){ rows[n].classList.add('now'); const r=rows[n].getBoundingClientRect(); if(r.top<160||r.bottom>innerHeight-40) rows[n].scrollIntoView({block:'center',behavior:'smooth'}); } }
+function watch(my){ cancelAnimationFrame(raf); const tick=()=>{ if(my!==token) return; if(audio.currentTime>=endAt||audio.ended){ audio.pause(); onSegEnd(); return; } raf=requestAnimationFrame(tick); }; raf=requestAnimationFrame(tick); }
+function playCur(){
+  const n=queue[qi], my=++token; mark(n);
+  const [ch,s,e]=SEG[n]; endAt=e+0.05;
+  const msg=`再生中：${label}（${qi+1}/${queue.length}）${reps>1?`　${rep+1}/${reps}回目`:''}`; statusEl.textContent=msg;
+  const go=()=>{ if(my!==token) return; statusEl.textContent=msg; audio.currentTime=Math.max(0,s-0.05); audio.playbackRate=rate; audio.play().then(()=>watch(my)).catch(()=>{statusEl.textContent='再生できませんでした。もう一度▶を押してください。'}); };
+  if(loadedCh!==ch){ loadedCh=ch; audio.src='audio/L'+String(ch).padStart(2,'0')+'.mp3'; audio.addEventListener('loadedmetadata',go,{once:true}); audio.load(); statusEl.textContent='音声を読み込み中…'; }
+  else go();
+}
+function startQueue(nums,lab){ clearTimeout(gapTimer); token++; audio.pause(); queue=nums; qi=0; rep=0; label=lab; playCur(); }
+function stop(){ clearTimeout(gapTimer); token++; cancelAnimationFrame(raf); audio.pause(); queue=[]; mark(null); statusEl.textContent='停止しました'; }
+function onSegEnd(){
+  rep++;
+  if(rep>=reps){ rep=0; qi++; }
+  if(qi>=queue.length){ mark(null); statusEl.textContent=`再生終了：${label}`; queue=[]; return; }
+  gapTimer=setTimeout(playCur, 700/rate + (rep>0?300:0));
+}
+audio.onerror=()=>{ if(queue.length) statusEl.textContent='音声を読み込めませんでした'; loadedCh=0; };
+document.getElementById('stop').onclick=stop;
+document.getElementById('playAll').onclick=()=>{
+  // start from the chapter currently shown in the selector
+  const no=+jump.value.slice(2); const i=order.indexOf(rows[order.find(n=>SEG[n][0]===no)]?order.find(n=>SEG[n][0]===no):order[0]);
+  startQueue(order.slice(i), `Level ${no}から`);
+};
+const he=document.getElementById('hideEn'), hj=document.getElementById('hideJa');
+he.onchange=()=>document.body.classList.toggle('hide-en',he.checked);
+hj.onchange=()=>document.body.classList.toggle('hide-ja',hj.checked);
+// keep chapter selector in sync with scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) jump.value=e.target.id; }),{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('h2.ch').forEach(h=>io.observe(h));
+</script>
